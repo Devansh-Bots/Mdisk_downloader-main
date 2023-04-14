@@ -4,7 +4,7 @@ from subprocess import run as srun, check_output
 from math import ceil
 import os
 import json
-from config TMEP_CHAT
+from config import TMEP_CHAT
 
 # premium account
 temp_channel = TMEP_CHAT
