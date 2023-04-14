@@ -2,13 +2,13 @@
 
 *A Telegram MDisk Video Downloader Bot, You can watch downloaded Videos without MX player (bypass mdisk requirements)*
 
-_This project is partly possible because of the donations from [𝓐 𝓙𝓪𝓴𝓱𝓪𝓻](https://t.me/Aaajats)_
+_This project is partly possible because of the donations from [ᴍᴜᴋᴇsʜ](https://t.me/Itz_legend_coder)
 
 ---
 
 # Variables 
 
-_You can use [config.json](https://github.com/bipinkrish/Mdisk-Downloader-Bot/blob/master/config.json) instead of ENVs_
+_You can use [config.py](https://github.com/bipinkrish/Mdisk_Downloader-main/blob/master/config.py) instead of ENVs_
 
 #### Required
 
@@ -83,3 +83,7 @@ python main.py
 ```
 
 ---
+# ᴄʀᴇᴅɪᴛs 
+# 
+<b> [─╼⃝𖠁 ᴍᴜᴋᴇsʜ 𖠁⃝╾─•](https://telegram.me/itz_LEGEND_CODER) <br> <br>
+ [­ 𝙳𝚎𝚟𝚊𝚗𝚜𝚑 ](https://telegram.me/devanshh_dubey)  
