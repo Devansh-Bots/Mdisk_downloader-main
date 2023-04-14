@@ -11,7 +11,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceRepl
 from mdisk import iswin, getinfo, mdow, merge
 import mediainfo
 from split import TG_SPLIT_SIZE, split_file, get_path_size, ss, temp_channel, isPremmium
-from config import *
+from config import ID,HASH,TOKEN,STRING,AUTH,BAN,OWNER,TARGET,LINK
 # conifg
 
 
@@ -25,9 +25,9 @@ app = Client("my_bot", api_id=ID, api_hash=HASH, bot_token=TOKEN)
 if isPremmium: acc = Client("myacc", api_id=ID, api_hash=HASH, session_string=ss)
 
 # optionals
-AUTH = os.environ.get("AUTH")
+AUTH=AUTH
 AUTHUSERS = AUTH.split()
-BAN = os.environ.get("BAN")
+BAN = BAN
 BANNEDUSERS = BAN.split()
 
 # control
