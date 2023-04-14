@@ -4,15 +4,13 @@ from subprocess import run as srun, check_output
 from math import ceil
 import os
 import json
-
-# conifg
-with open('config.json', 'r') as f: data = json.load(f)
+import config
 
 # premium account
-temp_channel = os.environ.get("TEMP_CHAT") or data.get("TEMP_CHAT", "")
+temp_channel =TEMP_CHAT
 try: temp_channel = int(temp_channel)
 except: pass
-ss = os.environ.get("STRING") or data.get("STRING", "")
+ss = STRING
 if ss != "" and temp_channel != "": isPremmium = True
 else: isPremmium = False
 
