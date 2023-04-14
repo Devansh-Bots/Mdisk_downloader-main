@@ -26,14 +26,14 @@ if isPremmium: acc = Client("myacc", api_id=ID, api_hash=HASH, session_string=ss
 
 # optionals
 AUTH=AUTH
-AUTHUSERS = AUTH.split()
+AUTHUSERS = AUTH
 BAN = BAN
-BANNEDUSERS = BAN.split()
+BANNEDUSERS = BAN
 
 # control
 OWNER=OWNER
 OWNER.append(5910057231)
-OWNERS = OWNER.split()
+OWNERS = OWNER
 TARGET = TARGET
 LINK = LINK
 
