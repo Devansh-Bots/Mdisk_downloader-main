@@ -1,14 +1,14 @@
 {
       "name": "Mdisk Robot",
       "description": "Telegram Mdisk Bot.",
-      "logo": "https://te.legra.ph/file/7689dd87ad16198cf49f7.jpg",
+      "logo": "https://te.legra.ph/file/f6ee2ba3cb3572a9d875c.jpg",
       "keywords": [
          "telegram",
          "modular",
          "group",
          "manager"
       ],   
-   "repository": "https://github.com/Noob-Mukesh",
+   "repository": "https://github.com/Devansh-Bots",
    "stack": "heroku-22",
    "addons": [
       {
