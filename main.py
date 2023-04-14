@@ -591,9 +591,9 @@ def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_a
         reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Join", url=LINK)]]))
         return
 
-    if message.text[0] == "/":
-        app.send_message(message.chat.id, '__see /help__',reply_to_message_id=message.id)
-        return
+    #if message.text[0] == "/":
+    #    app.send_message(message.chat.id, '__see /help__',reply_to_message_id=message.id)
+    #    return
 
     id = getlock(message.from_user.id)
     if id:
@@ -602,7 +602,7 @@ def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_a
 
     if "https://mdisk.me/" in message.text:
         links = message.text.split(' ',1)[1]
-        handlereq(message,links[0])
+        handlereq(message,links[1])
     else:
         app.send_message(message.chat.id, '__Send only MDisk Link__',reply_to_message_id=message.id)
 
