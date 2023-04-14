@@ -11,14 +11,14 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceRepl
 from mdisk import iswin, getinfo, mdow, merge
 import mediainfo
 from split import TG_SPLIT_SIZE, split_file, get_path_size, ss, temp_channel, isPremmium
-
+from config import *
 # conifg
 
 
 # app
-TOKEN = os.environ.get("TOKEN") 
-HASH = os.environ.get("HASH")
-ID = os.environ.get("ID") 
+TOKEN = TOKEN
+HASH = HASH
+ID = ID
 app = Client("my_bot", api_id=ID, api_hash=HASH, bot_token=TOKEN)
 
 # preiumum
@@ -31,10 +31,10 @@ BAN = os.environ.get("BAN")
 BANNEDUSERS = BAN.split()
 
 # control
-OWNER = os.environ.get("OWNER")
+OWNER=OWNER
 OWNERS = OWNER.split()
-TARGET = os.environ.get("TARGET") 
-LINK = os.environ.get("LINK")
+TARGET = TARGET
+LINK = LINK
 
 
 # setting commands
