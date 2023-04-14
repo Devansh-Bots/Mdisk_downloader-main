@@ -1,0 +1,75 @@
+{
+      "name": "Mdisk Robot",
+      "description": "Telegram Mdisk Bot.",
+      "logo": "https://te.legra.ph/file/7689dd87ad16198cf49f7.jpg",
+      "keywords": [
+         "telegram",
+         "modular",
+         "group",
+         "manager"
+      ],   
+   "repository": "https://github.com/Noob-Mukesh",
+   "stack": "heroku-22",
+   "addons": [
+      {
+         "options": {
+            "version": "12"
+         },
+         "plan": "heroku-postgresql"
+      }
+   ],
+   "env": {
+      "ID": {
+         "description": "Get this value from my.telegram.org/apps.",
+         "required": true,
+         "value": ""
+      },
+      "HASH": {
+         "description": "Get this value from my.telegram.org/apps.",
+         "required": true,
+         "value": ""
+      },
+     
+      "AUTH": {
+         "description": "AUTH USER",
+         "required": true,
+         "value": ""
+      },
+      "BAN": {
+         "description": "BANNED USER ID.",
+         "required": true,
+         "value": "True"
+      },
+      "ENV": {
+         "description": "Setting this to ANYTHING will enable environment variables. Leave it as it is",
+         "required": true,
+         "value": "True"
+      },
+      
+      "OWNER": {
+         "description": "Your user ID as an integer.",
+         "required": true,
+         "value": "2145093972"
+      },
+      "LINK": {
+         "description": "link",
+         "required": true,
+         "value": ""
+      },
+      "TMEP_CHAT": {
+         "description": "Your Telegram support group chat username where your users will go and bother you with shit.",
+         "required": true,
+         "value": ""
+      },
+      "STRING": {
+         "description": "Required  String",
+         "required": true,
+         "value": ""
+      },
+      "TOKEN": {
+         "description": "Get bot token from @BotFather on TG",
+         "required": true,
+         "value": ""
+      }
+   }
+}
