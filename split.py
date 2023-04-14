@@ -7,7 +7,7 @@ import json
 import config
 
 # premium account
-temp_channel = TEMP_CHAT
+temp_channel = TMEP_CHAT
 try: temp_channel = int(temp_channel)
 except: pass
 ss = STRING
