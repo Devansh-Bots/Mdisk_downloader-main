@@ -183,12 +183,12 @@ __Format:__ **{format}**\n__Thumbnail:__ **{thumb}**'
     keybord = InlineKeyboardMarkup(
             [   
                 [
-                    InlineKeyboardButton("Rename", callback_data=f'rename {message.id}'),
-                    InlineKeyboardButton("Change Format", callback_data=f'change {message.id}')
+                    InlineKeyboardButton("Rᴇɴᴀᴍᴇ", callback_data=f'rename {message.id}'),
+                    InlineKeyboardButton("Cʜᴀɴɢᴇ Fᴏʀᴍᴀᴛ", callback_data=f'change {message.id}')
                 ],
                 [ 
-                    InlineKeyboardButton(thum, callback_data=f'thumb {message.id}'),
-                    InlineKeyboardButton("Download", callback_data=f'down {message.id}') 
+                    InlineKeyboardButton("Tʜᴜᴍʙɴᴀɪʟ", callback_data=f'thumb {message.id}'),
+                    InlineKeyboardButton("ᴅᴏᴡɴʟᴏᴀᴅ", callback_data=f'down {message.id}') 
                 ]
             ])
 
@@ -247,7 +247,7 @@ def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
         return
     
     app.send_message(message.chat.id, f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
-    reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("📦 Source Code", url="https://github.com/Devansh-Bots/Mdisk-Downloader")]]))
+    reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Sᴏᴜʀᴄᴇ Cᴏᴅᴇ", url="https://t.me/Movie_chamber")]]))
 
 
 # help command
@@ -259,7 +259,8 @@ def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
         return
     
     helpmessage = """__**/start** - basic usage
-**/help** - 
+**/help** -
+** /download - send mdisk link to download 
 **/mdisk mdisklink** - usage
 **/thumb** - reply to a image document of size less than 200KB to set it as Thumbnail ( you can also send image as a photo to set it as Thumbnail automatically )
 **/remove** - remove Thumbnail
@@ -286,8 +287,8 @@ def auth(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
     if "unauth" in message.text and userid in AUTHUSERS: AUTHUSERS.remove(userid)
     elif "unauth" not in message.text and userid not in AUTHUSERS: AUTHUSERS.append(userid)
 
-    CONFIGDATA["AUTH"] = " ".join(AUTHUSERS)
-    with open("config.json",'w') as f: json.dump(CONFIGDATA,f)
+    AUTH = " ".join(AUTHUSERS)
+  
 
     if "unauth" in message.text: app.send_message(message.chat.id, f'__UnAuth Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)      
     else: app.send_message(message.chat.id, f'__Auth Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)        
@@ -311,8 +312,8 @@ def ban(client: pyrogram.client.Client, message: pyrogram.types.messages_and_med
     if "unban" in message.text and userid in BANNEDUSERS: BANNEDUSERS.remove(userid)
     elif "unban" not in message.text and userid not in BANNEDUSERS: BANNEDUSERS.append(userid)
 
-    CONFIGDATA["BAN"] = " ".join(BANNEDUSERS)
-    with open("config.json",'w') as f: json.dump(CONFIGDATA,f)
+    BAN = " ".join(BANNEDUSERS)
+    
 
     if "unban" in message.text: app.send_message(message.chat.id, f'__UnBan Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)      
     else: app.send_message(message.chat.id, f'__Ban Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)
@@ -576,7 +577,7 @@ def change(client: pyrogram.client.Client, message: pyrogram.types.messages_and_
     
 
 # mdisk link in text
-@app.on_message(filters.text)
+@app.on_message(filters.command("download")
 def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
     if isPremmium and message.chat.id == temp_channel: return
