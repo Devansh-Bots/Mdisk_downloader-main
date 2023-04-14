@@ -604,7 +604,7 @@ def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_a
         links = message.text.split(' ',1)[1]
         handlereq(message,links)
     else:
-        app.send_message(message.chat.id, '__Send only MDisk Link__',reply_to_message_id=message.id)
+        app.send_message(message.chat.id, '__Send only MDisk Link__ \n /download Mdisk link',reply_to_message_id=message.id)
 
 
 # polling
