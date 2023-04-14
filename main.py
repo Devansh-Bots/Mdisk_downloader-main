@@ -13,28 +13,28 @@ import mediainfo
 from split import TG_SPLIT_SIZE, split_file, get_path_size, ss, temp_channel, isPremmium
 
 # conifg
-with open('config.json', 'r') as f: CONFIGDATA = json.load(f)
+
 
 # app
-TOKEN = os.environ.get("TOKEN") or CONFIGDATA.get("TOKEN", "")
-HASH = os.environ.get("HASH") or CONFIGDATA.get("HASH", "")
-ID = os.environ.get("ID") or CONFIGDATA.get("ID", "")
+TOKEN = os.environ.get("TOKEN") 
+HASH = os.environ.get("HASH")
+ID = os.environ.get("ID") 
 app = Client("my_bot", api_id=ID, api_hash=HASH, bot_token=TOKEN)
 
 # preiumum
 if isPremmium: acc = Client("myacc", api_id=ID, api_hash=HASH, session_string=ss)
 
 # optionals
-AUTH = os.environ.get("AUTH") or CONFIGDATA.get("AUTH", "")
+AUTH = os.environ.get("AUTH")
 AUTHUSERS = AUTH.split()
-BAN = os.environ.get("BAN") or CONFIGDATA.get("BAN", "")
+BAN = os.environ.get("BAN")
 BANNEDUSERS = BAN.split()
 
 # control
-OWNER = os.environ.get("OWNER") or CONFIGDATA.get("OWNER", "")
+OWNER = os.environ.get("OWNER")
 OWNERS = OWNER.split()
-TARGET = os.environ.get("TARGET") or CONFIGDATA.get("TARGET", "")
-LINK = os.environ.get("LINK") or CONFIGDATA.get("LINK", "")
+TARGET = os.environ.get("TARGET") 
+LINK = os.environ.get("LINK")
 
 
 # setting commands
