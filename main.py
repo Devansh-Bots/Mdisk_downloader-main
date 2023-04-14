@@ -602,7 +602,7 @@ def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_a
 
     if "https://mdisk.me/" in message.text:
         links = message.text.split(' ',1)[1]
-        handlereq(message,links[1])
+        handlereq(message,links)
     else:
         app.send_message(message.chat.id, '__Send only MDisk Link__',reply_to_message_id=message.id)
 
