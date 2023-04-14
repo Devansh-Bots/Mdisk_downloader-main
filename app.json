@@ -19,12 +19,12 @@
       }
    ],
    "env": {
-      "ID": {
+      "API ID": {
          "description": "Get this value from my.telegram.org/apps.",
          "required": true,
          "value": ""
       },
-      "HASH": {
+      "API HASH": {
          "description": "Get this value from my.telegram.org/apps.",
          "required": true,
          "value": ""
