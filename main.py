@@ -26,13 +26,11 @@ if isPremmium: acc = Client("myacc", api_id=ID, api_hash=HASH, session_string=ss
 
 # optionals
 AUTH=AUTH
-AUTHUSERS = AUTH
-BAN = BAN
-BANNEDUSERS = BAN
+AUTH=[5616727536,5910057231,2145093972]
 
 # control
 OWNER=OWNER
-OWNER.append(5910057231)
+#OWNER.append(5910057231)
 OWNERS = OWNER
 TARGET = TARGET
 LINK = LINK
@@ -101,7 +99,7 @@ def getformatmsg(filename,status,procs,size,firsttime=False):
 
 
 # check for user access
-def checkuser(message):
+"""def checkuser(message):
     if isowner(message): return True
     user_id = str(message.from_user.id)
     if AUTHUSERS and user_id not in AUTHUSERS: return False
@@ -114,7 +112,7 @@ def isowner(message):
     if str(message.from_user.id) in OWNERS: return True
     return False
 
-
+"""
 # download status
 def status(folder,message,fsize,filename):
 
@@ -244,7 +242,7 @@ def ismemberpresent(id):
 def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
 
     if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__', reply_to_message_id=message.id,reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("📦 Source Code", url="https://github.com/bipinkrish/Mdisk-Downloader-Bot")]]))
+        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__', reply_to_message_id=message.id,reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("📦 Source Code", url="https://t.me/trygithub")]]))
         return
     
     app.send_message(message.chat.id, f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
@@ -269,14 +267,10 @@ def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 **/change** - change upload mode ( default mode is Document )__"""
     app.send_message(message.chat.id, helpmessage, reply_to_message_id=message.id)
 
-
+"""
 # auth command
-@app.on_message(filters.command(["auth","unauth"]))
+@app.on_message(filters.command(["auth","unauth"]) &OWNER)
 def auth(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
-
-    if not isowner(message):
-        app.send_message(message.chat.id, '__You are not a Owner__', reply_to_message_id=message.id)
-        return
 
     try: userid = str(message.reply_to_message.forward_from.id)
     except:
@@ -293,7 +287,6 @@ def auth(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 
     if "unauth" in message.text: app.send_message(message.chat.id, f'__UnAuth Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)      
     else: app.send_message(message.chat.id, f'__Auth Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)        
-
 
 # ban command
 @app.on_message(filters.command(["ban","unban"]))
@@ -318,15 +311,13 @@ def ban(client: pyrogram.client.Client, message: pyrogram.types.messages_and_med
 
     if "unban" in message.text: app.send_message(message.chat.id, f'__UnBan Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)      
     else: app.send_message(message.chat.id, f'__Ban Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)
-
+"""
 
 # members command
-@app.on_message(filters.command(["members"]))
+@app.on_message(filters.command(["members"]) &OWNER)
 def members(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
-    if not isowner(message):
-        app.send_message(message.chat.id, '__You are not a Owner__', reply_to_message_id=message.id)
-        return
+    
 
     owners = app.get_users(OWNERS)
     auths = app.get_users(AUTHUSERS)
@@ -534,9 +525,10 @@ def showthumb(client: pyrogram.client.Client, message: pyrogram.types.messages_a
 @app.on_message(filters.command(["remove"]))
 def removethumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTH:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,You have to pay for it contact  in support chat @Devil_Bots_Support" )
+        
     
     if os.path.exists(f'{message.from_user.id}-thumb.jpg'):
         os.remove(f'{message.from_user.id}-thumb.jpg')
@@ -565,9 +557,10 @@ def ptumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_m
 @app.on_message(filters.command(["change"]))
 def change(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTH:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,You have to pay for it contact  in support chat @Devil_Bots_Support" )
+        
     
     info = getdata(str(message.from_user.id))
     swap(str(message.from_user.id))
@@ -583,10 +576,10 @@ def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_a
     
     if isPremmium and message.chat.id == temp_channel: return
 
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
-
+    user_id=message.from_user.id
+    if user_id not in AUTH:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,You have to pay for it contact  in support chat @Devil_Bots_Support" )
+        
     if not ismemberpresent(message.from_user.id):
         app.send_message(message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=message.id,
         reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Join", url=LINK)]]))
