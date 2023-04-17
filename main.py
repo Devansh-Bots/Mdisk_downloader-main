@@ -240,27 +240,15 @@ def ismemberpresent(id):
 
 # start command
 @app.on_message(filters.command(["start"]))
-async def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
-
-    user_id=message.from_user.id
-    if user_id not in AUTHUSER:
-        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
-    else:    
-    
-        await app.send_message(message.chat.id, f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
+async def echo(bot,message):
+    await message.reply_text( f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
     reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Sᴏᴜʀᴄᴇ Cᴏᴅᴇ", url="https://t.me/Movie_chamber")]]))
 
 
 # help command
 @app.on_message(filters.command(["help"]))
-async def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
-    
-    user_id=message.from_user.id
-    if user_id not in AUTHUSER:
-        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
-    else:
-    
-        helpmessage = """__**/start** - basic usage
+async def help(bot, message):
+    helpmessage = """__**/start** - basic usage
 **/help** -
 ** /download - send mdisk link to download 
 **/mdisk mdisklink** - usage
@@ -268,7 +256,7 @@ async def help(client: pyrogram.client.Client, message: pyrogram.types.messages_
 **/remove** - remove Thumbnail
 **/show** - show Thumbnail
 **/change** - change upload mode ( default mode is Document )__"""
-        await app.send_message(message.chat.id, helpmessage, reply_to_message_id=message.id)
+    await message.reply_text( helpmessage, reply_to_message_id=message.id)
 
 """
 # auth command
@@ -336,12 +324,12 @@ def members(client: pyrogram.client.Client, message: pyrogram.types.messages_and
 
 # callback
 @app.on_callback_query()
-def handle(client: pyrogram.client.Client, call: pyrogram.types.CallbackQuery):
+async def handle(client: pyrogram.client.Client, call: pyrogram.types.CallbackQuery):
 
     if call.from_user.id != call.message.reply_to_message.from_user.id: return
 
     if not ismemberpresent(call.from_user.id):
-        app.send_message(call.message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=call.message.id,
+        await app.send_message(call.message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=call.message.id,
         reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Join", url=LINK)]]))
         return
 
@@ -360,7 +348,7 @@ def handle(client: pyrogram.client.Client, call: pyrogram.types.CallbackQuery):
         if get(id)[0] is None: app.edit_message_text(call.message.chat.id,call.message.id,"__Expired__")
         else:
             setlock(call.from_user.id,id)
-            app.send_message(call.message.chat.id, f"**{call.from_user.mention}** send me new Filename", reply_to_message_id=call.message.id, reply_markup=ForceReply(selective=True, placeholder="Filename..."))
+            await app.send_message(call.message.chat.id, f"**{call.from_user.mention}** send me new Filename", reply_to_message_id=call.message.id, reply_markup=ForceReply(selective=True, placeholder="Filename..."))
 
     elif data == "thumb":
         if os.path.exists(f'{call.from_user.id}-thumb.jpg'):
@@ -371,7 +359,7 @@ def handle(client: pyrogram.client.Client, call: pyrogram.types.CallbackQuery):
             if get(id)[0] is None: app.edit_message_text(call.message.chat.id,call.message.id,"__Expired__")
             else:
                 setlock(call.from_user.id,id)
-                app.send_message(call.message.chat.id, f"**{call.from_user.mention}** send a Image", reply_to_message_id=call.message.id, reply_markup=ForceReply(selective=True, placeholder="Image..."))
+                await app.send_message(call.message.chat.id, f"**{call.from_user.mention}** send a Image", reply_to_message_id=call.message.id, reply_markup=ForceReply(selective=True, placeholder="Image..."))
 
 
 # start process
