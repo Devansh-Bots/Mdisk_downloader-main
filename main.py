@@ -3,6 +3,7 @@ import threading
 import subprocess
 import time
 import json
+import asyncio
 
 import pyrogram
 from pyrogram import Client, filters
@@ -239,7 +240,7 @@ def ismemberpresent(id):
 
 # start command
 @app.on_message(filters.command(["start"]))
-def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
 
     user_id=message.from_user.id
     if user_id not in AUTHUSER:
@@ -252,7 +253,7 @@ def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 
 # help command
 @app.on_message(filters.command(["help"]))
-def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
     user_id=message.from_user.id
     if user_id not in AUTHUSER:
@@ -292,7 +293,7 @@ def auth(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 
 # ban command
 @app.on_message(filters.command(["ban","unban"]))
-def ban(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def ban(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
 
     user_id=message.from_user.id
     if user_id not in AUTHUSER:
@@ -467,10 +468,11 @@ def startdown(call):
 
 # mdisk command
 @app.on_message(filters.command(["mdisk"]))
-def mdiskdown(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
+async def mdiskdown(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+    user_id=message.from_user.id
+    if user_id not in AUTHUSER:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+    
 
     if not ismemberpresent(message.from_user.id):
         app.send_message(message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=message.id,
@@ -490,11 +492,12 @@ def mdiskdown(client: pyrogram.client.Client, message: pyrogram.types.messages_a
 
 # thumb command
 @app.on_message(filters.command(["thumb"]))
-def thumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def thumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTHUSER:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+    
 
     try:
         if int(message.reply_to_message.document.file_size) > 200000:
@@ -512,11 +515,12 @@ def thumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_m
 
 # show thumb command
 @app.on_message(filters.command(["show"]))
-def showthumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def showthumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTHUSER:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+    
     
     if os.path.exists(f'{message.from_user.id}-thumb.jpg'):
         app.send_photo(message.chat.id,photo=f'{message.from_user.id}-thumb.jpg',reply_to_message_id=message.id)
@@ -526,10 +530,10 @@ def showthumb(client: pyrogram.client.Client, message: pyrogram.types.messages_a
 
 # remove thumbline command
 @app.on_message(filters.command(["remove"]))
-def removethumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def removethumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
     user_id=message.from_user.id
-    if user_id not in AUTH:
+    if user_id not in AUTHUSER:
         return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,You have to pay for it contact  in support chat @Devil_Bots_Support" )
         
     
@@ -542,11 +546,12 @@ def removethumb(client: pyrogram.client.Client, message: pyrogram.types.messages
 
 # thumbline
 @app.on_message(filters.photo)
-def ptumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def ptumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTHUSER:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+    
     
     file = app.download_media(message)
     os.rename(file,f'{message.from_user.id}-thumb.jpg')
@@ -558,7 +563,7 @@ def ptumb(client: pyrogram.client.Client, message: pyrogram.types.messages_and_m
 
 # change mode
 @app.on_message(filters.command(["change"]))
-def change(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def change(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
     user_id=message.from_user.id
     if user_id not in AUTH:
@@ -575,12 +580,12 @@ def change(client: pyrogram.client.Client, message: pyrogram.types.messages_and_
 
 # mdisk link in text
 @app.on_message(filters.command("download"))
-def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+async def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
     if isPremmium and message.chat.id == temp_channel: return
 
     user_id=message.from_user.id
-    if user_id not in AUTH:
+    if user_id not in AUTHUSER:
         return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,You have to pay for it contact  in support chat @Devil_Bots_Support" )
         
     if not ismemberpresent(message.from_user.id):
