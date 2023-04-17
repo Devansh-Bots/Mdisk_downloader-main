@@ -39,7 +39,7 @@ LINK = LINK
 
 # setting commands
 cmds = ["start","help","mdisk","thumb","remove","show","change"]
-descs = ["Basic Usage","Help Message","Usage","Reply to a Image of size less than 200KB to set it as Thumbnail","Remove Thumbnail","Show Thumbnail","Change Upload Mode"]
+descs = ["Bᴀsɪᴄ Usᴀɢᴇ","Hᴇʟᴘ Mᴇssᴀɢᴇ","Usᴀɢᴇ","Reply to a Image of size less than 200KB to set it as Thumbnail","Remove Thumbnail","Show Thumbnail","Change Upload Mode"]
 with app: app.set_bot_commands(BotCommand(cmds[i].lower(),descs[i]) for i in range(len(cmds)))
 
 
