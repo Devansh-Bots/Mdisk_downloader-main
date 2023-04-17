@@ -26,7 +26,7 @@ if isPremmium: acc = Client("myacc", api_id=ID, api_hash=HASH, session_string=ss
 
 # optionals
 AUTH=AUTH
-AUTH=[5616727536,5910057231,2145093972]
+AUTHUSER=[5616727536,5910057231,2145093972]
 
 # control
 OWNER=OWNER
@@ -284,7 +284,7 @@ def auth(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
     if "unauth" in message.text and userid in AUTHUSERS: AUTHUSERS.remove(userid)
     elif "unauth" not in message.text and userid not in AUTHUSERS: AUTHUSERS.append(userid)
 
-    AUTH = " ".join(AUTHUSERS)
+    AUTH = " ".join(AUTHUSER)
   
 
     if "unauth" in message.text: app.send_message(message.chat.id, f'__UnAuth Sucessful for **{userid}**\nuse /members to see the updated list__',reply_to_message_id=message.id)      
