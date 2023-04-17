@@ -241,11 +241,12 @@ def ismemberpresent(id):
 @app.on_message(filters.command(["start"]))
 def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
 
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__', reply_to_message_id=message.id,reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("📦 Source Code", url="https://t.me/trygithub")]]))
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTHUSER:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+    else:    
     
-    app.send_message(message.chat.id, f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
+        app.send_message(message.chat.id, f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
     reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Sᴏᴜʀᴄᴇ Cᴏᴅᴇ", url="https://t.me/Movie_chamber")]]))
 
 
@@ -253,11 +254,12 @@ def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 @app.on_message(filters.command(["help"]))
 def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     
-    if not checkuser(message):
-        app.send_message(message.chat.id, '__You are either not **Authorized** or **Banned**__',reply_to_message_id=message.id)
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTHUSER:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+    else:
     
-    helpmessage = """__**/start** - basic usage
+        helpmessage = """__**/start** - basic usage
 **/help** -
 ** /download - send mdisk link to download 
 **/mdisk mdisklink** - usage
@@ -265,7 +267,7 @@ def help(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 **/remove** - remove Thumbnail
 **/show** - show Thumbnail
 **/change** - change upload mode ( default mode is Document )__"""
-    app.send_message(message.chat.id, helpmessage, reply_to_message_id=message.id)
+        app.send_message(message.chat.id, helpmessage, reply_to_message_id=message.id)
 
 """
 # auth command
@@ -292,9 +294,10 @@ def auth(client: pyrogram.client.Client, message: pyrogram.types.messages_and_me
 @app.on_message(filters.command(["ban","unban"]))
 def ban(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
 
-    if not isowner(message):
-        app.send_message(message.chat.id, '__You are not a Owner__', reply_to_message_id=message.id)
-        return
+    user_id=message.from_user.id
+    if user_id not in AUTHUSER:
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+    
 
     try: userid = str(message.reply_to_message.forward_from.id)
     except:
