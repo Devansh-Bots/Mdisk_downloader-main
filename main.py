@@ -247,7 +247,7 @@ async def echo(client: pyrogram.client.Client, message: pyrogram.types.messages_
         return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
     else:    
     
-        app.send_message(message.chat.id, f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
+        await app.send_message(message.chat.id, f'__Hi {message.from_user.mention}, I am Mdisk Video Downloader, you can watch Downloaded Videos without MX Player.\n\nSend me a link to Start... or click /help to check usage__',reply_to_message_id=message.id,
     reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Sᴏᴜʀᴄᴇ Cᴏᴅᴇ", url="https://t.me/Movie_chamber")]]))
 
 
@@ -268,7 +268,7 @@ async def help(client: pyrogram.client.Client, message: pyrogram.types.messages_
 **/remove** - remove Thumbnail
 **/show** - show Thumbnail
 **/change** - change upload mode ( default mode is Document )__"""
-        app.send_message(message.chat.id, helpmessage, reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, helpmessage, reply_to_message_id=message.id)
 
 """
 # auth command
@@ -323,8 +323,8 @@ def members(client: pyrogram.client.Client, message: pyrogram.types.messages_and
     
     
 
-    owners = app.get_users(OWNERS)
-    auths = app.get_users(AUTHUSERS)
+    owners = app.get_users(OWNER)
+    auths = app.get_users(AUTHUSER)
     bans = app.get_users(BANNEDUSERS)
 
     app.send_message(message.chat.id,
@@ -475,7 +475,7 @@ async def mdiskdown(client: pyrogram.client.Client, message: pyrogram.types.mess
     
 
     if not ismemberpresent(message.from_user.id):
-        app.send_message(message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=message.id,
+        await app.send_message(message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=message.id,
         reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Join", url=LINK)]]))
         return
 
@@ -483,11 +483,11 @@ async def mdiskdown(client: pyrogram.client.Client, message: pyrogram.types.mess
     except:
         try: link = message.text.split("mdisk ")[1]
         except:
-            app.send_message(message.chat.id, '__Invalid Format, use like this\n/mdisk https://mdisk.me/xxxxx\nor just send a link without command__',reply_to_message_id=message.id)
+            await app.send_message(message.chat.id, '__Invalid Format, use like this\n/mdisk https://mdisk.me/xxxxx\nor just send a link without command__',reply_to_message_id=message.id)
             return
 
     if "https://mdisk.me/" in link: handlereq(message,link)
-    else: app.send_message(message.chat.id, '__Send only MDisk Link with command followed by the link__',reply_to_message_id=message.id)
+    else: await app.send_message(message.chat.id, '__Send only MDisk Link with command followed by the link__',reply_to_message_id=message.id)
 
 
 # thumb command
@@ -501,16 +501,16 @@ async def thumb(client: pyrogram.client.Client, message: pyrogram.types.messages
 
     try:
         if int(message.reply_to_message.document.file_size) > 200000:
-            app.send_message(message.chat.id, '__Thumbline size allowed is < 200 KB__',reply_to_message_id=message.id)
+            await app.send_message(message.chat.id, '__Thumbline size allowed is < 200 KB__',reply_to_message_id=message.id)
             return
 
-        msg = app.get_messages(message.chat.id, int(message.reply_to_message.id))
-        file = app.download_media(msg)
+        msg = await app.get_messages(message.chat.id, int(message.reply_to_message.id))
+        file =await app.download_media(msg)
         os.rename(file,f'{message.from_user.id}-thumb.jpg')
-        app.send_message(message.chat.id, '__Thumbnail is Set__',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__Thumbnail is Set__',reply_to_message_id=message.id)
 
     except:
-        app.send_message(message.chat.id, '__reply /thumb to a image document of size less than 200KB__',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__reply /thumb to a image document of size less than 200KB__',reply_to_message_id=message.id)
 
 
 # show thumb command
@@ -523,9 +523,9 @@ async def showthumb(client: pyrogram.client.Client, message: pyrogram.types.mess
     
     
     if os.path.exists(f'{message.from_user.id}-thumb.jpg'):
-        app.send_photo(message.chat.id,photo=f'{message.from_user.id}-thumb.jpg',reply_to_message_id=message.id)
+        await app.send_photo(message.chat.id,photo=f'{message.from_user.id}-thumb.jpg',reply_to_message_id=message.id)
     else:
-        app.send_message(message.chat.id, '__Thumbnail is not Set__',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__Thumbnail is not Set__',reply_to_message_id=message.id)
 
 
 # remove thumbline command
@@ -539,9 +539,9 @@ async def removethumb(client: pyrogram.client.Client, message: pyrogram.types.me
     
     if os.path.exists(f'{message.from_user.id}-thumb.jpg'):
         os.remove(f'{message.from_user.id}-thumb.jpg')
-        app.send_message(message.chat.id, '__Thumbnail is Removed__',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__Thumbnail is Removed__',reply_to_message_id=message.id)
     else:
-        app.send_message(message.chat.id, '__Thumbnail is not Set__',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__Thumbnail is not Set__',reply_to_message_id=message.id)
 
 
 # thumbline
@@ -553,12 +553,12 @@ async def ptumb(client: pyrogram.client.Client, message: pyrogram.types.messages
         return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
     
     
-    file = app.download_media(message)
+    file = await app.download_media(message)
     os.rename(file,f'{message.from_user.id}-thumb.jpg')
 
     id = getlock(message.from_user.id)
     if id: handlethumb(message,id)
-    else: app.send_message(message.chat.id, '__Thumbnail is Set__',reply_to_message_id=message.id)
+    else:await app.send_message(message.chat.id, '__Thumbnail is Set__',reply_to_message_id=message.id)
     
 
 # change mode
@@ -573,9 +573,9 @@ async def change(client: pyrogram.client.Client, message: pyrogram.types.message
     info = getdata(str(message.from_user.id))
     swap(str(message.from_user.id))
     if info == "V":
-        app.send_message(message.chat.id, '__Mode changed from **Video** format to **Document** format__',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__Mode changed from **Video** format to **Document** format__',reply_to_message_id=message.id)
     else:
-        app.send_message(message.chat.id, '__Mode changed from **Document** format to **Video** format__',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__Mode changed from **Document** format to **Video** format__',reply_to_message_id=message.id)
     
 
 # mdisk link in text
@@ -589,12 +589,12 @@ async def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.mess
         return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,You have to pay for it contact  in support chat @Devil_Bots_Support" )
         
     if not ismemberpresent(message.from_user.id):
-        app.send_message(message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=message.id,
+        await app.send_message(message.chat.id, '__You are not a member of our Chat\nJoin and Retry__',reply_to_message_id=message.id,
         reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Join", url=LINK)]]))
         return
 
   #  if message.text[0] == "/":
-  #      app.send_message(message.chat.id, '__see /help__',reply_to_message_id=message.id)
+  #      await app.send_message(message.chat.id, '__see /help__',reply_to_message_id=message.id)
   #      return
 
     id = getlock(message.from_user.id)
@@ -606,7 +606,7 @@ async def mdisktext(client: pyrogram.client.Client, message: pyrogram.types.mess
         links = message.text.split(' ',1)[1]
         handlereq(message,links)
     else:
-        app.send_message(message.chat.id, '__Send only MDisk Link__ \n **Usage**/download Mdisk link',reply_to_message_id=message.id)
+        await app.send_message(message.chat.id, '__Send only MDisk Link__ \n **Usage**/download Mdisk link',reply_to_message_id=message.id)
 
 
 # polling
