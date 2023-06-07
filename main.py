@@ -115,7 +115,7 @@ def isowner(message):
 
 """
 # download status
-def status(folder,message,fsize,filename):
+async def status(folder,message,fsize,filename):
 
     # wait for the folder to create
     while True:
@@ -134,7 +134,7 @@ def status(folder,message,fsize,filename):
             size = float(open(f"tempS-{message.id}.txt","r").readlines()[-2].split()[2].replace(",",""))
 
         try:
-            app.edit_message_text(message.chat.id, message.id, getformatmsg(filename,"Downloading",size,fsize))
+            await app.edit_message_text(message.chat.id, message.id, getformatmsg(filename,"Downloading",size,fsize))
             time.sleep(10)
         except:
             time.sleep(5)
