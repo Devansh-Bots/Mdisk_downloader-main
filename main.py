@@ -143,7 +143,7 @@ def status(folder,message,fsize,filename):
 
 
 # upload status
-def upstatus(statusfile,message,filename):
+async def upstatus(statusfile,message,filename):
     while True:
         if os.path.exists(statusfile):
             break
@@ -153,7 +153,7 @@ def upstatus(statusfile,message,filename):
         with open(statusfile,"r") as upread:
             txt = upread.read().split()
         try:
-            app.edit_message_text(message.chat.id, message.id, getformatmsg(filename,"Uploading",float(txt[0]),float(txt[1])))
+            await app.edit_message_text(message.chat.id, message.id, getformatmsg(filename,"Uploading",float(txt[0]),float(txt[1])))
             time.sleep(10)
         except:
             time.sleep(5)
@@ -166,11 +166,11 @@ def progress(current, total, message):
 
 
 # format printter
-def formatprint(id,link="",edit=False,call=None, emsg=None):
+async def formatprint(id,link="",edit=False,call=None, emsg=None):
     
     message,alldata,link = get(id)
     if message is None:
-        app.edit_message_text(call.message.chat.id,call.message.id,"__Expired__")
+        await app.edit_message_text(call.message.chat.id,call.message.id,"__Expired__")
         return
     m, s = divmod(alldata['duration'], 60)
     h, m = divmod(m, 60)
@@ -193,19 +193,19 @@ __Format:__ **{format}**\n__Thumbnail:__ **{thumb}**'
             ])
 
     if not edit:
-        app.send_message(message.chat.id, text, reply_to_message_id=message.id, reply_markup=keybord)
+        await app.send_message(message.chat.id, text, reply_to_message_id=message.id, reply_markup=keybord)
     else:
         if call:
-            app.edit_message_text(call.message.chat.id,call.message.id, text, reply_markup=keybord)
+            await app.edit_message_text(call.message.chat.id,call.message.id, text, reply_markup=keybord)
         else:
-            app.edit_message_text(emsg.chat.id, emsg.reply_to_message.reply_to_message_id, text, reply_markup=keybord)
+            await app.edit_message_text(emsg.chat.id, emsg.reply_to_message.reply_to_message_id, text, reply_markup=keybord)
 
 # handler
-def handlereq(message,link):
+async def handlereq(message,link):
     alldata = getinfo(link)
 
     if alldata.get("size", 0) == 0 or alldata.get("source", None) is None:
-        app.send_message(message.chat.id,f"__Invalid Link : {link}__", reply_to_message_id=message.id)
+        await app.send_message(message.chat.id,f"__Invalid Link : {link}__", reply_to_message_id=message.id)
         return
 
     store(message,alldata,link)
@@ -213,27 +213,27 @@ def handlereq(message,link):
 
 
 # hanldle rename
-def handlereanme(msg,id):
+async def handlereanme(msg,id):
     setlock(msg.from_user.id,None)
     message,alldata,link = get(id)
     alldata['filename'] = msg.text
     store(message,alldata,link)
     formatprint(id,"",True,None,msg)
-    app.delete_messages(msg.chat.id,[msg.id,msg.reply_to_message.id])
+    await app.delete_messages(msg.chat.id,[msg.id,msg.reply_to_message.id])
 
 
 # handle thumb
-def handlethumb(msg,id):
+async def handlethumb(msg,id):
     setlock(msg.from_user.id,None)
     formatprint(id,"",True,None,msg)
-    app.delete_messages(msg.chat.id,[msg.id,msg.reply_to_message.id])
+    await app.delete_messages(msg.chat.id,[msg.id,msg.reply_to_message.id])
 
 
 # check for memeber present
-def ismemberpresent(id):
+async def ismemberpresent(id):
     if TARGET == "" or LINK == "": return True
     try:
-        app.get_chat_member(TARGET,id)
+        await app.get_chat_member(TARGET,id)
         return True
     except: return False
     
