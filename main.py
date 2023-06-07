@@ -459,7 +459,7 @@ def startdown(call):
 async def mdiskdown(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
     user_id=message.from_user.id
     if user_id not in AUTHUSER:
-        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss ",reply_markup=InlineKeyboardMarkup(X))
+        return await message.reply_text(f" ʜᴇʏ {message.from_user.mention} ɪ ᴀᴍ sᴏʀʀʏ ,ᴅᴜᴇ ᴛᴏ ᴀᴘɪ ʟɪᴍɪᴛᴀᴛɪᴏɴ ᴜ ᴄᴀɴ`ᴛ ᴜsᴇ ᴍᴇ ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ ғᴏʀ ᴜɴᴍɪʟᴛᴇᴅ ᴀᴄᴄᴇss  Contact @DamnDevansh")
     
 
     if not ismemberpresent(message.from_user.id):
