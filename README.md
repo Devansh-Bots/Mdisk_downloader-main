@@ -8,7 +8,7 @@ _This project is partly possible because of the donations from [ᴍᴜᴋᴇsʜ]
 
 # Variables 
 
-_You can use [config.py](https://github.com/bipinkrish/Mdisk_Downloader-main/blob/master/config.py) instead of ENVs_
+_You can use [config.py](https://github.com/devansh-bots/Mdisk_Downloader-main/blob/master/config.py) instead of ENVs_
 
 #### Required
 
@@ -64,7 +64,7 @@ members - see the list of Owners,Auths,Bans
 # Deploy on Heruko 
 ㅤㅤㅤᴅᴇᴘʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ​ 🚀
 ㅤㅤㅤᴛʜᴇ ᴇᴀsɪᴇsᴛ ᴡᴀʏ ᴛᴏ ᴅᴇᴘʟᴏʏ  
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/noob-mukesh/Mdisk-Downloader-Bot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/devansh-bots/Mdisk_Downloader_main"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
  ━━━━━━━━━━━━━━━━━━━━━━
 # Running Locally
 
@@ -72,8 +72,8 @@ members - see the list of Owners,Auths,Bans
 _Clone the repositary_
 
 ```
-git clone https://github.com/bipinkrish/Mdisk-Downloader-Bot.git
-cd Mdisk-Downloader-Bot
+git clone https://github.com/devansh-bots/Mdisk_Downloader_main.git
+cd Mdisk_Downloader_main
 ```
 
 _open `config.json` file and set the variables and start the bot_
@@ -85,5 +85,5 @@ python main.py
 ---
 # ᴄʀᴇᴅɪᴛs 
 # 
-<b> [─╼⃝𖠁 ᴍᴜᴋᴇsʜ 𖠁⃝╾─•](https://telegram.me/itz_LEGEND_CODER) <br> <br>
- [­ 𝙳𝚎𝚟𝚊𝚗𝚜𝚑 ](https://telegram.me/devanshh_dubey)  
+<b> [─╼⃝𖠁 ᴍᴜᴋᴇsʜ 𖠁⃝╾─•](https://telegram.me/LEGEND_CODER) <br> <br>
+ [­ 𝙳𝚎𝚟𝚊𝚗𝚜𝚑 ](https://telegram.me/damndevansh)  
